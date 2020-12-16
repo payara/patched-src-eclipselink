@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 usage() {
    echo "Usage"
@@ -37,6 +37,7 @@ patch() {
    fi
    
    find $MODULES -name org.eclipse.persistence* -printf %P\\n | \
+     grep -v org.eclipse.persistence.jpa.modelgen.processor | \
      sed  -e s/.jar// | \
      xargs -I{} sh -c "cp plugins/{}_*.jar  $MODULES/{}.jar"
 }
@@ -110,29 +111,24 @@ CMD=$1
 case "$CMD" in
    compile)
       compile
-      break
       ;;
    install)
       install `localRepo`
-      break
       ;;
 
    deploy)
       rm -rf $STAGE/org/eclipse/persistence
       install $STAGE
       deploy
-      break
       ;;
 
    stage)
       rm -rf $STAGE/org/eclipse/persistence
       install $STAGE
-      break
       ;;      
 
    patch)
       patch $2
-      break
       ;;
    *)
       usage
