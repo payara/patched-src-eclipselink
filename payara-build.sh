@@ -58,7 +58,7 @@ install() {
 
 deploy() {
    rm pom.xml
-   $MVN wagon:merge-maven-repos -Dwagon.source=file:/`realpath $STAGE` -Dwagon.target=file:/`realpath $REPO`
+   $MVN wagon:merge-maven-repos -Dwagon.source=file://`realpath $STAGE` -Dwagon.target=file://`realpath $REPO`
 }
 
 if [[ ! -d $M2_HOME ]] ; then
