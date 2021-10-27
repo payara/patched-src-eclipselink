@@ -570,6 +570,15 @@
             <param name="artifactJavadoc" value="${maven.2.common.plugins.dir}/org.eclipse.persistence.extension.javadocs_${version.string}.jar"/>
             <param name="artifactName"    value="EclipseLink Extensions"/>
             <param name="dependencies"    value="${extension.dependencies}"/>
+         </antcall>
+         <antcall target="upload-artifact">
+            <param name="groupId"         value="org.eclipse.persistence"/>
+            <param name="artifactId"      value="org.eclipse.persistence.asm"/>
+            <param name="artifactVersion" value="${maven.version}"/>
+            <param name="artifact"        value="${maven.2.common.plugins.dir}/org.eclipse.persistence.asm_${asm.version}.jar"/>
+            <param name="artifactSrc"     value="${maven.2.common.plugins.dir}/org.eclipse.persistence.asm.source_${asm.version}.jar"/>
+            <param name="artifactName"    value="EclipseLink ASM"/>
+            <param name="dependencies"    value=""/>
         </antcall>
     </target>
 
