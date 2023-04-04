@@ -19,6 +19,7 @@ package org.eclipse.persistence.tools.schemaframework;
 import java.io.Writer;
 import org.eclipse.persistence.exceptions.*;
 import org.eclipse.persistence.internal.sessions.AbstractSession;
+import org.eclipse.persistence.logging.SessionLog;
 import org.eclipse.persistence.sequencing.Sequence;
 
 /**
@@ -84,20 +85,22 @@ public abstract class SequenceDefinition extends DatabaseObjectDefinition {
      */
     @Override
     public void createOnDatabase(AbstractSession session) throws EclipseLinkException {
-        boolean exists = false;
-        final boolean loggingOff = session.isLoggingOff();
+        // If the sequence does not already exist a stack trace will be logged
+        // this temporarily  sets the level to FINEST to avoid having appear in the log
+        // unnecessarily
+        int logLevel = session.getLogLevel();
+        session.setLogLevel(SessionLog.FINEST);
         try {
-            session.setLoggingOff(true);
-            exists = checkIfExist(session);
-        } finally {
-            session.setLoggingOff(loggingOff);
-        }
-        if (exists) {
-            if (this.isAlterSupported(session)) {
-                alterOnDatabase(session);
+            if (checkIfExist(session)) {
+                if (this.isAlterSupported(session)) {
+                    alterOnDatabase(session);
+                }
+            } else {
+                super.createOnDatabase(session);
             }
-        } else {
-            super.createOnDatabase(session);
+        } finally {
+            // Reset log level
+            session.setLogLevel(logLevel);
         }
     }
 
