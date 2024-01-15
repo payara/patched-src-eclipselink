@@ -94,6 +94,10 @@ prepare() {
    tar -x -z -C $HOME/extension.lib.external -f $HOME/extension.lib.external/apache-maven-3.6.0-bin.tar.gz
 }
 
+upload() {
+   ant -f uploadToNexus.xml -Dmavenant.dir=target/ -Drelease.version=${VERSION} -Dbuild.type=RELEASE -Dgit.hash=`git rev-parse --short HEAD` -Dversion.string=${VERSION} -Dmaven.repo.dir=$HOME/.m2/repository -Dmaven.repo.url=https://nexus.dev.payara.fish/repository/payara-artifacts -DstagingId=payara-artifacts -DstagingURL=https://nexus.dev.payara.fish/repository/payara-artifacts -Dasm.version=${VERSION}
+}
+
 if [[ ! -d $M2_HOME ]] ; then
    usage
    echo ""
@@ -168,6 +172,10 @@ case "$CMD" in
 
    prepare)
       prepare
+      ;;
+
+   upload)
+      upload
       ;;
 
    *)
