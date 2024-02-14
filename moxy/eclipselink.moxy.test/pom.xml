@@ -1,42 +1,42 @@
-<?xml version="2.7.11.payara-p8.0" encoding="UTF-8"?>
+<?xml version="2.7.11.payara-p9-SNAPSHOT.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 202.7.11.payara-p88, 2022.7.11.payara-p8 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 202.7.11.payara-p9-SNAPSHOT8, 2022.7.11.payara-p9-SNAPSHOT Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
     http://www.eclipse.org/legal/epl-2.0,
-    or the Eclipse Distribution License v. 2.7.11.payara-p8.0 which is available at
-    http://www.eclipse.org/org/documents/edl-v2.7.11.payara-p80.php.
+    or the Eclipse Distribution License v. 2.7.11.payara-p9-SNAPSHOT.0 which is available at
+    http://www.eclipse.org/org/documents/edl-v2.7.11.payara-p9-SNAPSHOT0.php.
 
     SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause
 
 -->
 
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2002.7.11.payara-p8/XMLSchema-instance">
+    xmlns:xsi="http://www.w3.org/2002.7.11.payara-p9-SNAPSHOT/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
 
     <name>EclipseLink MOXy OSGi Tests</name>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>eclipselink.moxy.test</artifactId>
     <description>Tests for MOXy OSGi bundles</description>
-    <version>2.7.2.7.11.payara-p82.7.11.payara-p8-SNAPSHOT</version>
+    <version>2.7.2.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT-SNAPSHOT</version>
 
     <properties>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p832 -->
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT32 -->
         <apache.felix.framework.version>6.0.3</apache.felix.framework.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p834, 22.7.11.payara-p82.7.11.payara-p835, 22.7.11.payara-p82.7.11.payara-p836, 22.7.11.payara-p82.7.11.payara-p837 -->
-        <exam.version>4.2.7.11.payara-p83.2.7.11.payara-p8</exam.version>
-        <!-- CQ #3572.7.11.payara-p8 -->
-        <hibernate.version>6.2.7.11.payara-p8.0.Final</hibernate.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT34, 22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT35, 22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT36, 22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT37 -->
+        <exam.version>4.2.7.11.payara-p9-SNAPSHOT3.2.7.11.payara-p9-SNAPSHOT</exam.version>
+        <!-- CQ #3572.7.11.payara-p9-SNAPSHOT -->
+        <hibernate.version>6.2.7.11.payara-p9-SNAPSHOT.0.Final</hibernate.version>
         <jaxb.version>2.3.2</jaxb.version>
-        <log4j.version>2.2.7.11.payara-p86.0</log4j.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p839, 22.7.11.payara-p82.7.11.payara-p840 -->
-        <logback.version>2.7.11.payara-p8.3.0-alpha5</logback.version>
+        <log4j.version>2.2.7.11.payara-p9-SNAPSHOT6.0</log4j.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT39, 22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT40 -->
+        <logback.version>2.7.11.payara-p9-SNAPSHOT.3.0-alpha5</logback.version>
         <url.version>2.6.7</url.version>
         <validation.version>2.0.2</validation.version>
-        <eclipselink.version>2.7.2.7.11.payara-p82.7.11.payara-p8-SNAPSHOT</eclipselink.version>
+        <eclipselink.version>2.7.2.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT-SNAPSHOT</eclipselink.version>
     </properties>
 
     <dependencies>
@@ -66,7 +66,7 @@
             <scope>test</scope>
         </dependency>
         <!-- Hibernate validator and it's dependencies -->
-        <!-- CQ #3572.7.11.payara-p8 -->
+        <!-- CQ #3572.7.11.payara-p9-SNAPSHOT -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>2.7.11.payara-p8</version>
+            <version>2.7.11.payara-p9-SNAPSHOT</version>
         </dependency>
 
         <!-- Felix -->
@@ -150,8 +150,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>2.7.11.payara-p8.8</source>
-                    <target>2.7.11.payara-p8.8</target>
+                    <source>2.7.11.payara-p9-SNAPSHOT.8</source>
+                    <target>2.7.11.payara-p9-SNAPSHOT.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -174,7 +174,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.7.11.payara-p8.0</version>
+                <version>2.22.7.11.payara-p9-SNAPSHOT.0</version>
                 <configuration>
                     <environmentVariables>
                         <JAVA_HOME>${test.junit.jvm}</JAVA_HOME>

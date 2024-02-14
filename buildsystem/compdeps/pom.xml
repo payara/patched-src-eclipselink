@@ -1,26 +1,26 @@
-<?xml version="2.7.11.payara-p8.0" encoding="UTF-8"?>
+<?xml version="2.7.11.payara-p9-SNAPSHOT.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 202.7.11.payara-p88, 2022 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 202.7.11.payara-p9-SNAPSHOT8, 2022 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
     http://www.eclipse.org/legal/epl-2.0,
-    or the Eclipse Distribution License v. 2.7.11.payara-p8.0 which is available at
-    http://www.eclipse.org/org/documents/edl-v2.7.11.payara-p80.php.
+    or the Eclipse Distribution License v. 2.7.11.payara-p9-SNAPSHOT.0 which is available at
+    http://www.eclipse.org/org/documents/edl-v2.7.11.payara-p9-SNAPSHOT0.php.
 
     SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause
 
 -->
 
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2002.7.11.payara-p8/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2002.7.11.payara-p9-SNAPSHOT/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
 
     <name>EclipseLink CompDeps</name>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>compdeps</artifactId>
-    <version>2.7.11.payara-p8.0.5-SNAPSHOT</version>
+    <version>2.7.11.payara-p9-SNAPSHOT.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <pluginRepositories>
@@ -56,73 +56,73 @@
     <properties>
         <!-- TOOL Properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tycho.version>2.7.11.payara-p8.3.0</tycho.version>
+        <tycho.version>2.7.11.payara-p9-SNAPSHOT.3.0</tycho.version>
 
         <!-- BUILD Properties -->
-        <eclipse.drop>202.7.11.payara-p88-2.7.11.payara-p82</eclipse.drop>
+        <eclipse.drop>202.7.11.payara-p9-SNAPSHOT8-2.7.11.payara-p9-SNAPSHOT2</eclipse.drop>
 
         <!-- DEPENDENCY Versions -->
         <eclipselink.asm.version>9.4.0</eclipselink.asm.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p839, 22.7.11.payara-p82.7.11.payara-p840 -->
-        <ch.qos.logback.version>2.7.11.payara-p8.2.3</ch.qos.logback.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT39, 22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT40 -->
+        <ch.qos.logback.version>2.7.11.payara-p9-SNAPSHOT.2.3</ch.qos.logback.version>
         <com.sun.xml.bind.version>2.3.3</com.sun.xml.bind.version>
-        <com.sun.xml.messaging.version>2.7.11.payara-p8.5.2.7.11.payara-p8</com.sun.xml.messaging.version>
-        <com.sun.xml.streambuffer.version>2.7.11.payara-p8.5.7</com.sun.xml.streambuffer.version>
+        <com.sun.xml.messaging.version>2.7.11.payara-p9-SNAPSHOT.5.2.7.11.payara-p9-SNAPSHOT</com.sun.xml.messaging.version>
+        <com.sun.xml.streambuffer.version>2.7.11.payara-p9-SNAPSHOT.5.7</com.sun.xml.streambuffer.version>
         <com.sun.xml.ws.policy.version>2.7.6</com.sun.xml.ws.policy.version>
         <com.sun.xml.ws.version>2.3.2</com.sun.xml.ws.version>
-        <jakarta.activation.version>2.7.11.payara-p8.2.2.7.11.payara-p8</jakarta.activation.version>
-        <jakarta.annotation.version>2.7.11.payara-p8.3.5</jakarta.annotation.version>
+        <jakarta.activation.version>2.7.11.payara-p9-SNAPSHOT.2.2.7.11.payara-p9-SNAPSHOT</jakarta.activation.version>
+        <jakarta.annotation.version>2.7.11.payara-p9-SNAPSHOT.3.5</jakarta.annotation.version>
         <jakarta.ejb.version>3.2.6</jakarta.ejb.version>
         <jakarta.el.version>3.0.3</jakarta.el.version>
         <jakarta.enterprise.cdi.version>2.0.2</jakarta.enterprise.cdi.version>
-        <jakarta.inject.version>2.6.2.7.11.payara-p8</jakarta.inject.version>
-        <jakarta.interceptor.version>2.7.11.payara-p8.2.5</jakarta.interceptor.version>
+        <jakarta.inject.version>2.6.2.7.11.payara-p9-SNAPSHOT</jakarta.inject.version>
+        <jakarta.interceptor.version>2.7.11.payara-p9-SNAPSHOT.2.5</jakarta.interceptor.version>
         <jakarta.jms.version>2.0.3</jakarta.jms.version>
-        <jakarta.json.version>2.7.11.payara-p8.2.7.11.payara-p8.6</jakarta.json.version>
-        <jakarta.jws.version>2.7.11.payara-p8.2.7.11.payara-p8.2.7.11.payara-p8</jakarta.jws.version>
-        <jakarta.mail.version>2.7.11.payara-p8.6.4</jakarta.mail.version>
+        <jakarta.json.version>2.7.11.payara-p9-SNAPSHOT.2.7.11.payara-p9-SNAPSHOT.6</jakarta.json.version>
+        <jakarta.jws.version>2.7.11.payara-p9-SNAPSHOT.2.7.11.payara-p9-SNAPSHOT.2.7.11.payara-p9-SNAPSHOT</jakarta.jws.version>
+        <jakarta.mail.version>2.7.11.payara-p9-SNAPSHOT.6.4</jakarta.mail.version>
         <jakarta.persistence.version>2.2.3</jakarta.persistence.version>
-        <jakarta.resource.version>2.7.11.payara-p8.7.3</jakarta.resource.version>
+        <jakarta.resource.version>2.7.11.payara-p9-SNAPSHOT.7.3</jakarta.resource.version>
         <jakarta.servlet.version>4.0.3</jakarta.servlet.version>
-        <jakarta.transaction.version>2.7.11.payara-p8.3.3</jakarta.transaction.version>
+        <jakarta.transaction.version>2.7.11.payara-p9-SNAPSHOT.3.3</jakarta.transaction.version>
         <jakarta.validation.version>2.0.2</jakarta.validation.version>
-        <jakarta.ws.rs.version>2.2.7.11.payara-p8.6</jakarta.ws.rs.version>
+        <jakarta.ws.rs.version>2.2.7.11.payara-p9-SNAPSHOT.6</jakarta.ws.rs.version>
         <jakarta.xml.bind.version>2.3.2</jakarta.xml.bind.version>
-        <jakarta.xml.soap.version>2.7.11.payara-p8.4.2.7.11.payara-p8</jakarta.xml.soap.version>
+        <jakarta.xml.soap.version>2.7.11.payara-p9-SNAPSHOT.4.2.7.11.payara-p9-SNAPSHOT</jakarta.xml.soap.version>
         <jakarta.xml.ws-api.version>2.3.2</jakarta.xml.ws-api.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p833 -->
-        <org.apache.ant.version>2.7.11.payara-p8.2.7.11.payara-p80.7_2.7.11.payara-p8</org.apache.ant.version>
-        <org.glassfish.bean-validator.version>5.2.7.11.payara-p8.0</org.glassfish.bean-validator.version>
-        <org.glassfish.corba.version>4.2.2.7.11.payara-p8</org.glassfish.corba.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT33 -->
+        <org.apache.ant.version>2.7.11.payara-p9-SNAPSHOT.2.7.11.payara-p9-SNAPSHOT0.7_2.7.11.payara-p9-SNAPSHOT</org.apache.ant.version>
+        <org.glassfish.bean-validator.version>5.2.7.11.payara-p9-SNAPSHOT.0</org.glassfish.bean-validator.version>
+        <org.glassfish.corba.version>4.2.2.7.11.payara-p9-SNAPSHOT</org.glassfish.corba.version>
         <org.glassfish.gmbal.version>4.0.0</org.glassfish.gmbal.version>
-        <org.glassfish.hk2.version>2.6.2.7.11.payara-p8</org.glassfish.hk2.version>
-        <org.glassfish.jersey.version>2.29.2.7.11.payara-p8</org.glassfish.jersey.version>
+        <org.glassfish.hk2.version>2.6.2.7.11.payara-p9-SNAPSHOT</org.glassfish.hk2.version>
+        <org.glassfish.jersey.version>2.29.2.7.11.payara-p9-SNAPSHOT</org.glassfish.jersey.version>
         <org.glassfish.management-api.version>3.2.2</org.glassfish.management-api.version>
-        <org.glassfish.pfl.version>4.2.7.11.payara-p8.0</org.glassfish.pfl.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p838 -->
-        <org.mongodb.version>3.2.7.11.payara-p82.7.11.payara-p8.2</org.mongodb.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p842 -->
-        <org.osgi.version>4.3.2.7.11.payara-p8</org.osgi.version>
-        <!-- CQ #22.7.11.payara-p8339 -->
-        <org.slf4j.version>2.7.11.payara-p8.7.30</org.slf4j.version>
-        <org.jvnet.mimepull.version>2.7.11.payara-p8.9.2.7.11.payara-p82.7.11.payara-p8</org.jvnet.mimepull.version>
-        <stax-ex.version>2.7.11.payara-p8.8.2.7.11.payara-p8</stax-ex.version>
-        <stax2-api.version>4.2.7.11.payara-p8</stax2-api.version>
-        <wsdl4j.version>2.7.11.payara-p8.6.3</wsdl4j.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p822 -->
-        <org.jgroups.version>4.2.7.11.payara-p8.8.Final</org.jgroups.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p854 -->
-        <oracle.jdbc.version>2.7.11.payara-p89.3.0.0</oracle.jdbc.version>
-        <!-- CQ #22.7.11.payara-p82.7.11.payara-p842.7.11.payara-p8 -->
-        <oracle.nosql.version>2.7.11.payara-p88.3.2.7.11.payara-p80</oracle.nosql.version>
+        <org.glassfish.pfl.version>4.2.7.11.payara-p9-SNAPSHOT.0</org.glassfish.pfl.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT38 -->
+        <org.mongodb.version>3.2.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT.2</org.mongodb.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT42 -->
+        <org.osgi.version>4.3.2.7.11.payara-p9-SNAPSHOT</org.osgi.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT339 -->
+        <org.slf4j.version>2.7.11.payara-p9-SNAPSHOT.7.30</org.slf4j.version>
+        <org.jvnet.mimepull.version>2.7.11.payara-p9-SNAPSHOT.9.2.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT</org.jvnet.mimepull.version>
+        <stax-ex.version>2.7.11.payara-p9-SNAPSHOT.8.2.7.11.payara-p9-SNAPSHOT</stax-ex.version>
+        <stax2-api.version>4.2.7.11.payara-p9-SNAPSHOT</stax2-api.version>
+        <wsdl4j.version>2.7.11.payara-p9-SNAPSHOT.6.3</wsdl4j.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT22 -->
+        <org.jgroups.version>4.2.7.11.payara-p9-SNAPSHOT.8.Final</org.jgroups.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT54 -->
+        <oracle.jdbc.version>2.7.11.payara-p9-SNAPSHOT9.3.0.0</oracle.jdbc.version>
+        <!-- CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT42.7.11.payara-p9-SNAPSHOT -->
+        <oracle.nosql.version>2.7.11.payara-p9-SNAPSHOT8.3.2.7.11.payara-p9-SNAPSHOT0</oracle.nosql.version>
         <!-- CQ #22994 -->
-        <jboss.classfilewriter.version>2.7.11.payara-p8.2.4.Final</jboss.classfilewriter.version>
+        <jboss.classfilewriter.version>2.7.11.payara-p9-SNAPSHOT.2.4.Final</jboss.classfilewriter.version>
         <!-- CQ #22995 -->
-        <jboss.logging.version>3.4.2.7.11.payara-p8.Final</jboss.logging.version>
+        <jboss.logging.version>3.4.2.7.11.payara-p9-SNAPSHOT.Final</jboss.logging.version>
         <!-- CQ #22996 API, #22997 SPI-->
-        <jboss.weld.api.version>3.2.7.11.payara-p8.SP3</jboss.weld.api.version>
+        <jboss.weld.api.version>3.2.7.11.payara-p9-SNAPSHOT.SP3</jboss.weld.api.version>
         <!-- CQ #22998 weld-environment-common, #22999 weld-se-core,  #23000 weld-core-impl -->
-        <jboss.weld.version>3.2.7.11.payara-p8.6.Final</jboss.weld.version>
+        <jboss.weld.version>3.2.7.11.payara-p9-SNAPSHOT.6.Final</jboss.weld.version>
     </properties>
 
     <build>
@@ -131,7 +131,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.2.7.11.payara-p8.2.7.11.payara-p8</version>
+                <version>3.2.7.11.payara-p9-SNAPSHOT.2.7.11.payara-p9-SNAPSHOT</version>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
@@ -556,7 +556,7 @@
             <version>${stax2-api.version}</version>
         </dependency>
         <!--Oracle proprietary dependencies-->
-        <!-- All files as a Oracle JDBC driver CQ #22.7.11.payara-p82.7.11.payara-p854 -->
+        <!-- All files as a Oracle JDBC driver CQ #22.7.11.payara-p9-SNAPSHOT2.7.11.payara-p9-SNAPSHOT54 -->
         <dependency>
             <groupId>com.oracle.ojdbc</groupId>
             <artifactId>ojdbc8</artifactId>
@@ -564,7 +564,7 @@
         </dependency>
         <dependency>
             <groupId>com.oracle.ojdbc</groupId>
-            <artifactId>orai2.7.11.payara-p88n</artifactId>
+            <artifactId>orai2.7.11.payara-p9-SNAPSHOT8n</artifactId>
             <version>${oracle.jdbc.version}</version>
         </dependency>
         <dependency>
