@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>org.eclipse.persistence.bundles</artifactId>
-        <version>4.0.0-M3.payara-p8</version>
+        <version>4.0.0-M3.payara-p9-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
