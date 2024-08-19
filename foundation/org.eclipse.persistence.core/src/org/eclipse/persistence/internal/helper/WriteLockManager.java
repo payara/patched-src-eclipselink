@@ -22,10 +22,13 @@
 //       - 526957 : Split the logging and trace messages
 package org.eclipse.persistence.internal.helper;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -45,6 +48,7 @@ import org.eclipse.persistence.internal.sessions.MergeManager;
 import org.eclipse.persistence.internal.sessions.ObjectChangeSet;
 import org.eclipse.persistence.internal.sessions.UnitOfWorkChangeSet;
 import org.eclipse.persistence.internal.sessions.UnitOfWorkImpl;
+import org.eclipse.persistence.logging.AbstractSessionLog;
 import org.eclipse.persistence.logging.SessionLog;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 
@@ -175,6 +179,7 @@ public class WriteLockManager {
                 // we will now always check for how long the current thread is stuck in this while loop going nowhere
                 // using the exact same approach we have been adding to the concurrency manager
                 ConcurrencyUtil.SINGLETON.determineIfReleaseDeferredLockAppearsToBeDeadLocked(toWaitOn, whileStartTimeMillis, lockManager, readLockManager, ALLOW_INTERRUPTED_EXCEPTION_TO_BE_FIRED_UP_TRUE);
+                SessionLog logger = AbstractSessionLog.getLog();
 
                 toWaitOnLock.lock();
                 try {
@@ -183,7 +188,12 @@ public class WriteLockManager {
                             toWaitOnLockCondition.await(ConcurrencyUtil.SINGLETON.getAcquireWaitTime(), TimeUnit.MILLISECONDS);// wait for lock on object to be released
                         }
                     } catch (InterruptedException ex) {
-                        // Ignore exception thread should continue.
+                        // Allow thread interruptions for bad threads stuck in org.eclipse.persistence.internal.helper.WriteLockManager.acquireLocksForClone
+                        if (ConcurrencyUtil.SINGLETON.isInterruptionOfLockWaitEnabled()) {
+                            logger.log(SessionLog.SEVERE, SessionLog.CACHE, "write_lock_manager_allow_interruption_lockwait_interrupted_throws");
+                            throw ConcurrencyException.waitWasInterrupted(ex.getMessage());
+                        }
+                        logger.log(SessionLog.FINE, SessionLog.CACHE, "write_lock_manager_allow_interruption_lockwait_interrupted_continues");
                     }
                 } finally {
                     toWaitOnLock.unlock();
@@ -197,6 +207,7 @@ public class WriteLockManager {
                 toWaitOn = acquireLockAndRelatedLocks(objectForClone, lockedObjects, refreshedObjects, cacheKey, descriptor, cloningSession);
                 if ((toWaitOn != null) && ((++tries) > MAXTRIES)) {
                     // If we've tried too many times abort.
+                    logger.log(SessionLog.FINE, SessionLog.CACHE, "write_lock_manager_lockwait_exceeded_max_tries", MAXTRIES);
                     throw ConcurrencyException.maxTriesLockOnCloneExceded(objectForClone);
                 }
             }
