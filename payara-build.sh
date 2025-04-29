@@ -98,6 +98,10 @@ upload() {
    ant -f uploadToNexus.xml -Dmavenant.dir=target/ -Drelease.version=${VERSION} -Dbuild.type=RELEASE -Dgit.hash=`git rev-parse --short HEAD` -Dversion.string=${VERSION} -Dmaven.repo.dir=$HOME/.m2/repository -Dmaven.repo.url=https://nexus.dev.payara.fish/repository/payara-artifacts -DstagingId=payara-artifacts -DstagingURL=https://nexus.dev.payara.fish/repository/payara-artifacts -Dasm.version=${VERSION}
 }
 
+snapshot() {
+   ant -f uploadToNexus.xml -Dmavenant.dir=target/ -Drelease.version=${VERSION} -Dbuild.type=RELEASE -Dgit.hash=`git rev-parse --short HEAD` -Dversion.string=${VERSION} -Dmaven.repo.dir=$HOME/.m2/repository -Dmaven.repo.url=https://nexus.dev.payara.fish/repository/payara-snapshots -DstagingId=payara-snapshots -DstagingURL=https://nexus.dev.payara.fish/repository/payara-snapshots -DsnapshotURL=https://nexus.dev.payara.fish/repository/payara-snapshots -DsnapshotId=payara-snapshots -Dasm.version=${VERSION}
+}
+
 if [[ ! -d $M2_HOME ]] ; then
    usage
    echo ""
@@ -172,6 +176,10 @@ case "$CMD" in
 
    prepare)
       prepare
+      ;;
+
+   snapshot)
+      snapshot
       ;;
 
    upload)
