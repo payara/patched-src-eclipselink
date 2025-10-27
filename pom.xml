@@ -22,7 +22,7 @@
     <description>Comprehensive and universal persistence framework for Java.</description>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>org.eclipse.persistence.parent</artifactId>
-    <version>5.0.0-B11.payara-p1</version>
+    <version>5.0.0-B11.payara-p2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
