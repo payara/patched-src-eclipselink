@@ -24,13 +24,13 @@
     <description>Documentation - User Guide (Old)</description>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>org.eclipse.persistence.documentation.userguide</artifactId>
-    <version>5.0.0-B08.payara-p1</version>
+    <version>5.0.0-B08.payara-p2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>org.eclipse.persistence.documentation</artifactId>
-        <version>5.0.0-B08.payara-p1</version>
+        <version>5.0.0-B08.payara-p2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
