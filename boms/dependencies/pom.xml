@@ -21,12 +21,12 @@
     <parent>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>org.eclipse.persistence.bom</artifactId>
-        <version>5.0.0-B13.payara-p1</version>
+        <version>5.0.0-B13.payara-p2-SNAPSHOT</version>
         <relativePath>../bom/pom.xml</relativePath>
     </parent>
 
     <artifactId>org.eclipse.persistence.dependencies</artifactId>
-    <version>5.0.0-B13.payara-p1</version>
+    <version>5.0.0-B13.payara-p2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>EclipseLink Dependencies</name>
