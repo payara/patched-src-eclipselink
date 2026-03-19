@@ -639,7 +639,7 @@
     <!-- Staging targets -->
     <target name="ua-staging" if="sign">
         <exec dir="${maven.build.location}" executable="sh">
-            <arg line="-c '${M2_HOME}/bin/mvn clean gpg:sign-and-deploy-file -Dfile=${artifact} -DpomFile=${maven.build.location}/pom.xml -Durl=${stagingURL} -DrepositoryId=${stagingId} -Poss-release -Dgpg.keyname='" />
+            <arg line="-c '${M2_HOME}/bin/mvn clean gpg:sign-and-deploy-file -Dfile=${artifact} -DpomFile=${maven.build.location}/pom.xml -Durl=${stagingURL} -DrepositoryId=${stagingId} -Poss-release'" />
         </exec>
     </target>
     <target name="us-staging" if="sign">
