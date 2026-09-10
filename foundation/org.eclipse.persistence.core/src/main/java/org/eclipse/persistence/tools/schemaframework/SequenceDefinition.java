@@ -119,13 +119,14 @@ public abstract class SequenceDefinition extends DatabaseObjectDefinition {
     @Override
     @Deprecated(forRemoval = true, since = "4.0.9")
     public void createOnDatabase(AbstractSession session) throws EclipseLinkException {
+        final boolean loggingOff = session.isLoggingOff();
         // If the sequence does not already exist a stack trace will be logged
         // this temporarily  sets the level to FINEST to avoid having appear in the log
         // unnecessarily
         int logLevel = session.getLogLevel();
         session.setLogLevel(SessionLog.FINEST);
         try {
-            if (checkIfExist(session)) {
+            if (session.getPlatform().checkSequenceExists(session, this, true)) {
                 if (this.isAlterSupported(session)) {
                     alterOnDatabase(session);
                 }
@@ -133,6 +134,7 @@ public abstract class SequenceDefinition extends DatabaseObjectDefinition {
                 super.createOnDatabase(session);
             }
         } finally {
+            session.setLoggingOff(loggingOff);
             // Reset log level
             session.setLogLevel(logLevel);
         }
