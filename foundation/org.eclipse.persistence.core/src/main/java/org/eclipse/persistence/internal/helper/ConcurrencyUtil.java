@@ -61,6 +61,7 @@ public class ConcurrencyUtil {
     public static final int DEFAULT_CONCURRENCY_MANAGER_WRITE_LOCK_MANAGER_ACQUIRE_REQUIRED_LOCKS_NO_THREADS = 2;
     public static final long DEFAULT_CONCURRENCY_SEMAPHORE_MAX_TIME_PERMIT = 2000L;
     public static final long DEFAULT_CONCURRENCY_SEMAPHORE_LOG_TIMEOUT = 10000L;
+    private static final boolean DEFAULT_INTERRUPTION_OF_LOCKWAIT = false;
 
     private long acquireWaitTime = getLongProperty(SystemProperties.CONCURRENCY_MANAGER_ACQUIRE_WAIT_TIME, DEFAULT_ACQUIRE_WAIT_TIME);
     private long buildObjectCompleteWaitTime = getLongProperty(SystemProperties.CONCURRENCY_MANAGER_BUILD_OBJECT_COMPLETE_WAIT_TIME, DEFAULT_BUILD_OBJECT_COMPLETE_WAIT_TIME);
@@ -70,6 +71,7 @@ public class ConcurrencyUtil {
     private boolean allowInterruptedExceptionFired = getBooleanProperty(SystemProperties.CONCURRENCY_MANAGER_ALLOW_INTERRUPTED_EXCEPTION, DEFAULT_INTERRUPTED_EXCEPTION_FIRED);
     private boolean allowConcurrencyExceptionToBeFiredUp = getBooleanProperty(SystemProperties.CONCURRENCY_MANAGER_ALLOW_CONCURRENCY_EXCEPTION, DEFAULT_CONCURRENCY_EXCEPTION_FIRED);
     private boolean allowTakingStackTraceDuringReadLockAcquisition = getBooleanProperty(SystemProperties.CONCURRENCY_MANAGER_ALLOW_STACK_TRACE_READ_LOCK, DEFAULT_TAKING_STACKTRACE_DURING_READ_LOCK_ACQUISITION);
+    private boolean allowInterruptionOfLockWait = getBooleanProperty(SystemProperties.CONCURRENCY_MANAGER_ALLOW_INTERRUPTION_OF_LOCKWAIT, DEFAULT_INTERRUPTION_OF_LOCKWAIT);
 
     private boolean useSemaphoreInObjectBuilder  = getBooleanProperty(SystemProperties.CONCURRENCY_MANAGER_USE_SEMAPHORE_TO_SLOW_DOWN_OBJECT_BUILDING, DEFAULT_USE_SEMAPHORE_TO_SLOW_DOWN_OBJECT_BUILDING_CONCURRENCY);
     private boolean useSemaphoreToLimitConcurrencyOnWriteLockManagerAcquireRequiredLocks  = getBooleanProperty(SystemProperties.CONCURRENCY_MANAGER_USE_SEMAPHORE_TO_SLOW_DOWN_WRITE_LOCK_MANAGER_ACQUIRE_REQUIRED_LOCKS, DEFAULT_USE_SEMAPHORE_TO_SLOW_DOWN_WRITE_LOCK_MANAGER_ACQUIRE_REQUIRED_LOCKS);
@@ -306,6 +308,14 @@ public class ConcurrencyUtil {
 
     public void setAllowTakingStackTraceDuringReadLockAcquisition(boolean allowTakingStackTraceDuringReadLockAcquisition) {
         this.allowTakingStackTraceDuringReadLockAcquisition = allowTakingStackTraceDuringReadLockAcquisition;
+    }
+
+    public boolean isInterruptionOfLockWaitEnabled() {
+        return allowInterruptionOfLockWait;
+    }
+
+    public void setInterruptionOfLockWaitEnabled(boolean interruptionOfLockWaitEnabled) {
+        this.allowInterruptionOfLockWait = interruptionOfLockWaitEnabled;
     }
 
     public boolean isUseSemaphoreInObjectBuilder() {

@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class H2Platform extends DatabasePlatform {
     @Serial
@@ -109,6 +110,8 @@ public class H2Platform extends DatabasePlatform {
         fieldTypeMapping.put(char[].class, new FieldDefinition.DatabaseType("LONGVARCHAR", false));
         fieldTypeMapping.put(java.sql.Blob.class, new FieldDefinition.DatabaseType("BLOB", false));
         fieldTypeMapping.put(java.sql.Clob.class, new FieldDefinition.DatabaseType("CLOB", false));
+
+        fieldTypeMapping.put(UUID.class, new FieldDefinition.DatabaseType("BINARY", 16));
 
         fieldTypeMapping.put(java.sql.Date.class, new FieldDefinition.DatabaseType("DATE", false));
         fieldTypeMapping.put(java.sql.Timestamp.class, new FieldDefinition.DatabaseType("TIMESTAMP", false));
