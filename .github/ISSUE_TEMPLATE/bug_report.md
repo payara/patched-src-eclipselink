@@ -52,6 +52,6 @@ The best way to describe a bug is to give us a test case.
 To simplify this process there are Maven archetypes in `etc/archetypes/bug_test_case` project directory which can be  built locally by "mvn install".
 Initial test project can then be generated from these archetypes by:
 
-`mvn archetype:generate  -DarchetypeGroupId=org.eclipse.persistence -DarchetypeArtifactId=org.eclipse.persistence.bug.jpa-archetype -DarchetypeVersion=5.0.0-SNAPSHOT -DgroupId=eclipselink.bug.testcase -DartifactId=jpa-testcase`
+`mvn archetype:generate  -DarchetypeGroupId=org.eclipse.persistence -DarchetypeArtifactId=org.eclipse.persistence.bug.jpa-archetype -DarchetypeVersion=5.0.1.payara-p1-SNAPSHOT -DgroupId=eclipselink.bug.testcase -DartifactId=jpa-testcase`
 
-`mvn archetype:generate  -DarchetypeGroupId=org.eclipse.persistence -DarchetypeArtifactId=org.eclipse.persistence.bug.moxy-archetype -DarchetypeVersion=5.0.0-SNAPSHOT -DgroupId=eclipselink.bug.testcase -DartifactId=moxy-testcase`
+`mvn archetype:generate  -DarchetypeGroupId=org.eclipse.persistence -DarchetypeArtifactId=org.eclipse.persistence.bug.moxy-archetype -DarchetypeVersion=5.0.1.payara-p1-SNAPSHOT -DgroupId=eclipselink.bug.testcase -DartifactId=moxy-testcase`
