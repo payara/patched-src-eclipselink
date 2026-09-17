@@ -22,12 +22,12 @@
     <parent>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>org.eclipse.persistence.tests.bom</artifactId>
-        <version>5.0.1.payara-p1-SNAPSHOT</version>
+        <version>5.0.1.payara-p2-SNAPSHOT</version>
         <relativePath>boms/tests/pom.xml</relativePath>
     </parent>
 
     <artifactId>org.eclipse.persistence.project</artifactId>
-    <version>5.0.1.payara-p1-SNAPSHOT</version>
+    <version>5.0.1.payara-p2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>EclipseLink Project</name>
@@ -1098,10 +1098,10 @@
             <id>db2-start</id>
             <build>
                 <plugins>
-                    <!-- Docker Maven Plugin 
+                    <!-- Docker Maven Plugin
 
-                        Note, macOS may need to set DOCKER_HOST via e.g. 
-                    
+                        Note, macOS may need to set DOCKER_HOST via e.g.
+
                         DOCKER_HOST=unix:///Users/$(whoami)/.docker/run/docker.sock
                     -->
                     <plugin>
@@ -1141,7 +1141,7 @@
                         </executions>
                     </plugin>
 
-                    
+
                     <plugin>
                         <groupId>io.fabric8</groupId>
                         <artifactId>docker-maven-plugin</artifactId>
@@ -1155,7 +1155,7 @@
                                     <driver>local</driver>
                                 </volume>
                             </volumes>
-                            
+
                             <images>
                                 <image>
                                     <alias>db2</alias>
@@ -1169,7 +1169,7 @@
                                         <ports>
                                             <port>50000:${db.port}</port>
                                         </ports>
-                                        
+
                                         <platform>linux/amd64</platform>
 
                                         <env>
@@ -1188,16 +1188,16 @@
                                             </bind>
                                         </volumes>
 
-                                        <!-- 
+                                        <!--
                                             Wait for DB2 to be ready before proceeding
-                                            
+
                                             Note: this can take quite some time. On a M1 Pro:
-                                            DOCKER> [icr.io/db2_community/db2:latest] "db2": Waited on log out 'Setup has completed' 302450 ms 
+                                            DOCKER> [icr.io/db2_community/db2:latest] "db2": Waited on log out 'Setup has completed' 302450 ms
                                         -->
                                         <wait>
                                             <log>Setup has completed</log>
                                             <time>300000</time> <!-- 5 minutes timeout -->
-                                            
+
                                             <exec>
                                                 <postStart>bash /opt/db2-init/init-db2.sh</postStart>
                                                 <breakOnError>true</breakOnError>
@@ -1274,7 +1274,7 @@
                         </executions>
                     </plugin>
 
-                
+
                 </plugins>
             </build>
         </profile>

@@ -206,6 +206,22 @@ public final class SystemProperties {
 
     /**
      * <p>
+     * This property control (enable/disable) if
+     * <code>ConcurrencyException</code> fired when dead-lock diagnostic is
+     * enabled.
+     * <p>
+     * <b>Allowed Values</b> (case sensitive String)<b>:</b>
+     * <ul>
+     * <li>"<code>false</code>" (DEFAULT) - don't collect debug/trace
+     * information during ReadLock acquisition
+     * <li>"<code>true</code>" - collect debug/trace information during ReadLock
+     * acquisition. Has negative impact to the performance.
+     * </ul>
+     */
+    public static final String CONCURRENCY_MANAGER_ALLOW_INTERRUPTION_OF_LOCKWAIT = "eclipselink.concurrency.manager.allow.interruption.lockwait";
+
+    /**
+     * <p>
      * This property control (enable/disable) semaphore in {@link org.eclipse.persistence.internal.descriptors.ObjectBuilder}
      * </p>
      * Object building see {@link org.eclipse.persistence.internal.descriptors.ObjectBuilder} could be one of the

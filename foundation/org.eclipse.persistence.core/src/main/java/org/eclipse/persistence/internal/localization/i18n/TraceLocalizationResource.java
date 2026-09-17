@@ -318,6 +318,9 @@ Total number of cacheKeys to describe: {0}\s
                 + " stopping the candidate thread to make progress... We expect this code spot to never be invoked. "
                 + " Either this thread made progress or if it continues to be stuck in the releaseDeferredLock "
                 + " we most likely have an implementation bug somewhere. "},
+        {"write_lock_manager_lockwait_exceeded_max_tries", "Max {0} tries exceeded during Write Lock Manager acquiring locks for clone."},
+        {"write_lock_manager_allow_interruption_lockwait_interrupted_throws", "Write Lock Manager was interrupted during acquiring locks for clone and 'eclipselink.concurrency.manager.allow.interruption.lockwait' was set to true, throwing ConcurrencyException"},
+        {"write_lock_manager_allow_interruption_lockwait_interrupted_continues", "Write Lock Manager was interrupted during acquiring locks for clone and 'eclipselink.concurrency.manager.allow.interruption.lockwait' was set to false, ignoring and continue"},
         { "concurrency_util_threads_having_difficulty_getting_cache_keys_with_object_different_than_null_during_merge_clones_to_cache_after_transaction_commit_justification",
                 " Merge manager logic is currently stuck in the process of trying to return the cache key: {0}  \n"
                 + " this cache key is currently acquired by a competing thread: {1} . \n"
