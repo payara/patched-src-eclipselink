@@ -464,8 +464,13 @@ public class MetamodelImpl implements Metamodel, Serializable {
             }
         }
 
-        //1 - process all non-mappedSuperclass types first so we pick up attribute types
-        //2 - process mappedSuperclass types and lookup collection attribute types on inheriting entity types when field is not set
+        //1 - preinitalise all mappings so attribute types are set
+        //2 - process all non-mappedSuperclass types first so we pick up attribute types
+        //3 - process mappedSuperclass types and lookup collection attribute types on inheriting entity types when field is not set
+        
+        for(ManagedTypeImpl<?> managedType : new ArrayList<ManagedTypeImpl<?>>(managedTypes.values())) {
+            managedType.preinitaliseMappings(session);
+        }
 
         /**
          * Delayed-Initialization (process all mappings) of all Managed types
@@ -477,7 +482,7 @@ public class MetamodelImpl implements Metamodel, Serializable {
             managedType.initialize();
         }
 
-        // 3 - process all the Id attributes on each IdentifiableType
+        // 4 - process all the Id attributes on each IdentifiableType
         for(ManagedTypeImpl<?> potentialIdentifiableType : managedTypes.values()) {
             if(potentialIdentifiableType.isIdentifiableType()) {
                 ((IdentifiableTypeImpl<?>)potentialIdentifiableType).initializeIdAttributes();
@@ -492,7 +497,7 @@ public class MetamodelImpl implements Metamodel, Serializable {
         }
         isInitialized = true;
     }
-
+    
     /**
      *  Return the metamodel managed type representing the
      *  entity, mapped superclass, or embeddable class.

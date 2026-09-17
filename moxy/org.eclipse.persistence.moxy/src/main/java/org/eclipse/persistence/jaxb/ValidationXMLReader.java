@@ -94,7 +94,8 @@ public class ValidationXMLReader implements Callable<Map<Class<?>, Boolean>> {
      * Checks if validation.xml exists.
      */
     public static boolean isValidationXmlPresent() {
-        return getThreadContextClassLoader().getResource(VALIDATION_XML) != null;
+        ClassLoader threadContextClassLoader = getThreadContextClassLoader();
+        return threadContextClassLoader != null && threadContextClassLoader.getResource(VALIDATION_XML) != null;
     }
 
     private void parseConstraintFiles() {
@@ -170,7 +171,14 @@ public class ValidationXMLReader implements Callable<Map<Class<?>, Boolean>> {
 
     private static ClassLoader getThreadContextClassLoader() {
         return PrivilegedAccessHelper.callDoPrivileged(
-                () -> Thread.currentThread().getContextClassLoader()
+                () ->  {
+                    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+                    if (classLoader == null) {
+                        Thread.currentThread().setContextClassLoader(ClassLoader.getSystemClassLoader());
+                        classLoader = Thread.currentThread().getContextClassLoader();
+                    }
+                    return classLoader;
+                }
         );
     }
 
