@@ -181,19 +181,29 @@ public class WriteLockManager {
                 ConcurrencyUtil.SINGLETON.determineIfReleaseDeferredLockAppearsToBeDeadLocked(toWaitOn, whileStartTimeMillis, lockManager, readLockManager, ALLOW_INTERRUPTED_EXCEPTION_TO_BE_FIRED_UP_TRUE);
                 SessionLog logger = AbstractSessionLog.getLog();
 
-                synchronized (toWaitOn) {
-                    try {
-                        if (toWaitOn.isAcquired()) {//last minute check to insure it is still locked.
-                            toWaitOn.wait(ConcurrencyUtil.SINGLETON.getAcquireWaitTime());// wait for lock on object to be released
-                        }
-                    } catch (InterruptedException ex) {
-                        // Allow thread interruptions for bad threads stuck in org.eclipse.persistence.internal.helper.WriteLockManager.acquireLocksForClone
-                        if (ConcurrencyUtil.SINGLETON.isInterruptionOfLockWaitEnabled()) {
-                            logger.log(SessionLog.SEVERE, SessionLog.CACHE, "write_lock_manager_allow_interruption_lockwait_interrupted_throws");
-                            throw ConcurrencyException.waitWasInterrupted(ex.getMessage());
-                        }
-                        logger.log(SessionLog.FINE, SessionLog.CACHE, "write_lock_manager_allow_interruption_lockwait_interrupted_continues");
+                // FISH-14646: wait on the CacheKey's own lock/condition, NOT the object monitor.
+                // ConcurrencyManager.release()/releaseReadLock() signal instanceLockCondition under
+                // instanceLock; they never call notify()/notifyAll() on the object monitor. The previous
+                // "synchronized (toWaitOn) { toWaitOn.wait(...) }" therefore missed every wakeup (lost
+                // wakeup) and, with the default acquire wait time of 0, waited forever. Mirrors the
+                // lock/condition pattern already used in acquireRequiredLocks below.
+                toWaitOn.getInstanceLock().lock();
+                try {
+                    if (toWaitOn.isAcquired()) {//last minute check to insure it is still locked.
+                        // With the default acquire wait time (0) fall back to MAX_WAIT so the wait is
+                        // bounded like upstream; an explicit eclipselink.concurrency.manager.waittime is honoured.
+                        long acquireWaitTime = ConcurrencyUtil.SINGLETON.getAcquireWaitTime();
+                        toWaitOn.getInstanceLockCondition().await(acquireWaitTime > 0 ? acquireWaitTime : MAX_WAIT, TimeUnit.MILLISECONDS);// wait for lock on object to be released
                     }
+                } catch (InterruptedException ex) {
+                    // Allow thread interruptions for bad threads stuck in org.eclipse.persistence.internal.helper.WriteLockManager.acquireLocksForClone
+                    if (ConcurrencyUtil.SINGLETON.isInterruptionOfLockWaitEnabled()) {
+                        logger.log(SessionLog.SEVERE, SessionLog.CACHE, "write_lock_manager_allow_interruption_lockwait_interrupted_throws");
+                        throw ConcurrencyException.waitWasInterrupted(ex.getMessage());
+                    }
+                    logger.log(SessionLog.FINE, SessionLog.CACHE, "write_lock_manager_allow_interruption_lockwait_interrupted_continues");
+                } finally {
+                    toWaitOn.getInstanceLock().unlock();
                 }
                 Object waitObject = toWaitOn.getObject();
                 // Object may be null for loss of identity.
