@@ -34,7 +34,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -132,9 +131,7 @@ public class WriteLockManager {
     /*  the first element in this list will be the prevailing thread */
     protected ExposedNodeLinkedList prevailingQueue;
 
-    private final Lock toWaitOnLock = new ReentrantLock();
     private final Lock instancePrevailingQueueLock = new ReentrantLock();
-    private final Condition toWaitOnLockCondition = toWaitOnLock.newCondition();
 
     private static final String ACQUIRE_LOCK_FOR_CLONE_METHOD_NAME = WriteLockManager.class.getName() + ".acquireLocksForClone(...)";
 
@@ -183,11 +180,19 @@ public class WriteLockManager {
                 ConcurrencyUtil.SINGLETON.determineIfReleaseDeferredLockAppearsToBeDeadLocked(toWaitOn, whileStartTimeMillis, lockManager, readLockManager, ALLOW_INTERRUPTED_EXCEPTION_TO_BE_FIRED_UP_TRUE);
                 SessionLog logger = AbstractSessionLog.getLog();
 
-                toWaitOnLock.lock();
+                // FISH-14646: wait on the CacheKey's own lock/condition, NOT a Lock/Condition private to
+                // this WriteLockManager instance. ConcurrencyManager.release()/releaseReadLock() signal
+                // the CacheKey's own instanceLockCondition under instanceLock; they never touch
+                // toWaitOnLock/toWaitOnLockCondition, so the previous code missed every wakeup (lost
+                // wakeup) and, with the default acquire wait time of 0, waited forever.
+                toWaitOn.getInstanceLock().lock();
                 try {
                     try {
                         if (toWaitOn.isAcquired()) {//last minute check to insure it is still locked.
-                            toWaitOnLockCondition.await(ConcurrencyUtil.SINGLETON.getAcquireWaitTime(), TimeUnit.MILLISECONDS);// wait for lock on object to be released
+                            // With the default acquire wait time (0) fall back to MAX_WAIT so the wait is
+                            // bounded like upstream; an explicit eclipselink.concurrency.manager.waittime is honoured.
+                            long acquireWaitTime = ConcurrencyUtil.SINGLETON.getAcquireWaitTime();
+                            toWaitOn.getInstanceLockCondition().await(acquireWaitTime > 0 ? acquireWaitTime : MAX_WAIT, TimeUnit.MILLISECONDS);// wait for lock on object to be released
                         }
                     } catch (InterruptedException ex) {
                         // Allow thread interruptions for bad threads stuck in org.eclipse.persistence.internal.helper.WriteLockManager.acquireLocksForClone
@@ -198,7 +203,7 @@ public class WriteLockManager {
                         logger.log(SessionLog.FINE, SessionLog.CACHE, "write_lock_manager_allow_interruption_lockwait_interrupted_continues");
                     }
                 } finally {
-                    toWaitOnLock.unlock();
+                    toWaitOn.getInstanceLock().unlock();
                 }
                 Object waitObject = toWaitOn.getObject();
                 // Object may be null for loss of identity.
